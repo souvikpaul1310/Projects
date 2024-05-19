@@ -25,8 +25,8 @@ def verify_api_key(request):
 
 class GenerateKey(Resource):
     def post(self):
-        args = parser.parse_args(req=request)
-        if not verify_api_key(args):
+        #args = parser.parse_args()
+        if not verify_api_key(request):
             return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
         
         auth_key = generate_key()
@@ -35,8 +35,8 @@ class GenerateKey(Resource):
 
 class GetKey(Resource):
     def get(self):
-        args = parser.parse_args(req=request)
-        if not verify_api_key(args):
+        #args = parser.parse_args()
+        if not verify_api_key(request):
             return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
             
         global auth_key
