@@ -4,7 +4,7 @@ import random
 import string
 from flask_restful import Api, Resource, reqparse
 
-parser = reqparse.RequestParser()
+#parser = reqparse.RequestParser()
 app = Flask(__name__)
 api = Api(app)
 auth_key = None
