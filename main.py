@@ -2,8 +2,9 @@ import os
 from flask import Flask, jsonify
 import random
 import string
-from flask_restful import Api, Resource
+from flask_restful import Api, Resource, reqparse
 
+parser = reqparse.RequestParser()
 app = Flask(__name__)
 api = Api(app)
 auth_key = None
@@ -24,7 +25,8 @@ def verify_api_key(request):
 
 class GenerateKey(Resource):
     def post(self):
-        if not verify_api_key(request):
+        args = parser.parse_args()
+        if not verify_api_key(args):
             return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
         
         auth_key = generate_key()
@@ -33,7 +35,8 @@ class GenerateKey(Resource):
 
 class GetKey(Resource):
     def get(self):
-        if not verify_api_key(request):
+        args = parser.parse_args()
+        if not verify_api_key(args):
             return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
             
         global auth_key
