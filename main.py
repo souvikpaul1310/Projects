@@ -46,6 +46,11 @@ class GetKey(Resource):
             return jsonify({'error': 'Not Found', 'message': 'No authentication key has been generated'}), 404
 
 
+class HealthCheck(Resource):
+    def health_check():
+        return jsonify({"status": "ok"}), 200
+
+
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({'error': 'Not Found', 'message': 'The requested URL was not found on the server'}), 404
@@ -60,4 +65,4 @@ def internal_server_error(error):
     
 api.add_resource(GenerateKey, '/generate_key')
 api.add_resource(GetKey, '/get_key')
-
+api.add_resource(HealthCheck, '/healthcheck')
