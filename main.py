@@ -25,12 +25,15 @@ def verify_api_key(request):
 
 class GenerateKey(Resource):
     def post(self):
-        #args = parser.parse_args()
         if not verify_api_key(request):
             return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
         
         auth_key = generate_key()
-        return jsonify({'auth_key': auth_key})
+        auth_key_str = str(auth_key)
+        
+        response = make_response(auth_key_str)
+        response.mimetype = "text/plain"
+        return response
 
 
 class GetKey(Resource):
