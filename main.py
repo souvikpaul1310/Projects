@@ -1,10 +1,8 @@
 import os
-from flask import Flask, jsonify, request
-import random
-import string
-from flask_restful import Api, Resource, reqparse
+from flask import Flask, jsonify, request, make_response
+import secrets
+from flask_restful import Api, Resource
 
-#parser = reqparse.RequestParser()
 app = Flask(__name__)
 api = Api(app)
 auth_key = None
@@ -14,7 +12,7 @@ API_KEY = os.getenv('API_KEY')
 
 def generate_key():
     global auth_key
-    auth_key = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=16))
+    auth_key = secrets.token_hex(16)
     return auth_key
 
 
@@ -29,16 +27,11 @@ class GenerateKey(Resource):
             return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
         
         auth_key = generate_key()
-        auth_key_str = str(auth_key)
-        
-        response = make_response(auth_key_str)
-        response.mimetype = "text/plain"
-        return response
+        return make_response(auth_key, 200)
 
 
 class GetKey(Resource):
     def get(self):
-        #args = parser.parse_args()
         if not verify_api_key(request):
             return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
             
@@ -69,3 +62,5 @@ def internal_server_error(error):
 api.add_resource(GenerateKey, '/generate_key')
 api.add_resource(GetKey, '/get_key')
 api.add_resource(HealthCheck, '/healthcheck')
+
+
