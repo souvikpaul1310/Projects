@@ -44,7 +44,7 @@ class GetKey(Resource):
 
 class HealthCheck(Resource):
     def get(self):
-        return jsonify({"status": "ok"}), 200
+        return 200
 
 
 @app.errorhandler(404)
