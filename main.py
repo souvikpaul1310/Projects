@@ -1,4 +1,3 @@
-import os
 from flask import Flask, jsonify, request, make_response
 import secrets
 from flask_restful import Api, Resource
@@ -7,23 +6,15 @@ app = Flask(__name__)
 api = Api(app)
 auth_key = None
 
-API_KEY = os.getenv('API_KEY')
-
 
 def generate_key():
     global auth_key
     auth_key = secrets.token_hex(16)
     return auth_key
-
-
-def verify_api_key(request):
-    api_key = request.headers.get('x-api-key')
-    return api_key == API_KEY
     
 
 class GenerateKey(Resource):
-    def post(self):
-        if not verify_api_key(request):
+    def get(self):
             return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
         
         auth_key = generate_key()
@@ -32,7 +23,6 @@ class GenerateKey(Resource):
 
 class GetKey(Resource):
     def get(self):
-        if not verify_api_key(request):
             return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
             
         global auth_key
@@ -40,11 +30,6 @@ class GetKey(Resource):
             return jsonify({'auth_key': auth_key})
         else:
             return jsonify({'error': 'Not Found', 'message': 'No authentication key has been generated'}), 404
-
-
-class HealthCheck(Resource):
-    def get(self):
-        return jsonify({'status': 'ok'}), 200
 
 
 @app.errorhandler(404)
@@ -61,6 +46,3 @@ def internal_server_error(error):
     
 api.add_resource(GenerateKey, '/generate_key')
 api.add_resource(GetKey, '/get_key')
-api.add_resource(HealthCheck, '/healthcheck')
-
-
