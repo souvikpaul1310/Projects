@@ -15,16 +15,12 @@ def generate_key():
 
 class GenerateKey(Resource):
     def get(self):
-            return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
-        
         auth_key = generate_key()
         return make_response(auth_key, 200)
 
 
 class GetKey(Resource):
     def get(self):
-            return jsonify({'error': 'Unauthorized', 'message': 'Invalid or missing API key'}), 401
-            
         global auth_key
         if auth_key:
             return jsonify({'auth_key': auth_key})
