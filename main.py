@@ -23,22 +23,22 @@ class GetKey(Resource):
     def get(self):
         global auth_key
         if auth_key:
-            return jsonify({'auth_key': auth_key})
+            return make_response(auth_key, 200)
         else:
-            return jsonify({'error': 'Not Found', 'message': 'No authentication key has been generated'}), 404
+            return make_responce('No authentication key has been generated', 404)
 
 
 @app.errorhandler(404)
 def not_found(error):
-    return jsonify({'error': 'Not Found', 'message': 'The requested URL was not found on the server'}), 404
+    return make_responce('The requested URL was not found on the server' , 404)
 
 @app.errorhandler(405)
 def method_not_allowed(error):
-    return jsonify({'error': 'Method Not Allowed', 'message': 'The method is not allowed for the requested URL'}), 405
+    return make_responce('The method is not allowed for the requested URL', 405)
 
 @app.errorhandler(500)
 def internal_server_error(error):
-    return jsonify({'error': 'Internal Server Error', 'message': 'An internal server error occurred'}), 500
+    return make_responce('An internal server error occurred', 500)
     
 api.add_resource(GenerateKey, '/generate_key')
 api.add_resource(GetKey, '/get_key')
