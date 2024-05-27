@@ -25,7 +25,7 @@ class GetKey(Resource):
         if auth_key:
             return make_response(auth_key, 200)
         else:
-            return make_responce('No authentication key has been generated', 404)
+            return make_response('No authentication key has been generated', 404)
 
 
 @app.errorhandler(404)
