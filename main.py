@@ -30,15 +30,15 @@ class GetKey(Resource):
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_responce('The requested URL was not found on the server' , 404)
+    return make_response('The requested URL was not found on the server' , 404)
 
 @app.errorhandler(405)
 def method_not_allowed(error):
-    return make_responce('The method is not allowed for the requested URL', 405)
+    return make_response('The method is not allowed for the requested URL', 405)
 
 @app.errorhandler(500)
 def internal_server_error(error):
-    return make_responce('An internal server error occurred', 500)
+    return make_response('An internal server error occurred', 500)
     
 api.add_resource(GenerateKey, '/generate_key')
 api.add_resource(GetKey, '/get_key')
