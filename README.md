@@ -17,18 +17,18 @@ To get started with this project, follow these steps:
    git clone https://github.com/souvikpaul1310/Projects.git
    ```
 2. **Navigate to the project directory:**
-  ```bash
+   ```bash
    cd Projects
-  ```
+   ```
 3. **Install the required dependencies:**
-  ```bash
+   ```bash
    pip install -r requirements.txt
-  ```
+   ```
 
 4. **Run the main script:**
-  ```bash
+   ```bash
    python main.py
-  ```
+   ```
 
 ## Contributing:
 Contributions are welcome! If you have suggestions or improvements, please open an issue or submit a pull request.
