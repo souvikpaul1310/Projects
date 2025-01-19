@@ -30,6 +30,6 @@ To get started with this project, follow these steps:
    python main.py
   ```
 
-##Contributing:
-> Contributions are welcome! If you have suggestions or improvements, please open an issue or submit a pull request.
+## Contributing:
+Contributions are welcome! If you have suggestions or improvements, please open an issue or submit a pull request.
 
