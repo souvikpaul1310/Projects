@@ -15,26 +15,21 @@ To get started with this project, follow these steps:
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/souvikpaul1310/Projects.git
-
-2. Navigate to the project directory:
-
+   ```
+2. **Navigate to the project directory:**
   ```bash
-  cd Projects
- ```
-Install the required dependencies:
+   cd Projects
+  ```
+3. **Install the required dependencies:**
+  ```bash
+   pip install -r requirements.txt
+  ```
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Run the main script:
+4. **Run the main script:**
+  ```bash
+   python main.py
+  ```
 
-bash
-Copy
-Edit
-python main.py
-Contributing
-Contributions are welcome! If you have suggestions or improvements, please open an issue or submit a pull request.
+##Contributing:
+> Contributions are welcome! If you have suggestions or improvements, please open an issue or submit a pull request.
 
-License
-This project is licensed under the MIT License.
